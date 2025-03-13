@@ -81,5 +81,53 @@ describe('Event Planning System', () => {
       expect(response.status).toBe(200);
       expect(response.body.length).toBe(1);
     });
+
+    test('Should update an existing event', async () => {
+      // Create test event
+      events.push({
+        id: 1,
+        userId: 1,
+        name: 'Test Event',
+        description: 'Test Description',
+        datetime: new Date('2024-01-01T10:00:00'),
+        category: 'Meeting',
+        reminder: 30
+      });
+
+      const response = await request(app)
+        .put('/events/1')
+        .set('Authorization', `Bearer ${authToken}`)
+        .send({
+          name: 'Updated Event',
+          description: 'Updated Description',
+          date: '2024-01-02',
+          time: '11:00',
+          category: 'Workshop',
+          reminder: 15
+        });
+
+      expect(response.status).toBe(200);
+      expect(response.body.name).toBe('Updated Event');
+    });
+
+    test('Should delete an existing event', async () => {
+      // Create test event
+      events.push({
+        id: 1,
+        userId: 1,
+        name: 'Test Event',
+        description: 'Test Description',
+        datetime: new Date('2024-01-01T10:00:00'),
+        category: 'Meeting',
+        reminder: 30
+      });
+
+      const response = await request(app)
+        .delete('/events/1')
+        .set('Authorization', `Bearer ${authToken}`);
+
+      expect(response.status).toBe(204); // Update expected status code to 204
+      expect(events.length).toBe(0);
+    });
   });
 });

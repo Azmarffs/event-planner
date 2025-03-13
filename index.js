@@ -1,8 +1,8 @@
 const express = require('express');
 const cors = require('cors');
-const authRoutes = require('./routes/auth');
-const eventRoutes = require('./routes/events');
-const { authenticateToken } = require('./middleware/auth');
+const authRoutes = require('./src/routes/auth'); // Updated path
+const eventRoutes = require('./src/routes/events'); // Updated path
+const { authenticateToken } = require('./src/middleware/auth'); // Updated path
 
 const app = express();
 const PORT = process.env.PORT || 3000;

@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../index');
+const app = require('../../index'); // Updated path
 const users = require('../data/users');
 const events = require('../data/events');
 const jwt = require('jsonwebtoken');

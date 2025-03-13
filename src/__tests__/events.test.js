@@ -5,9 +5,19 @@ const events = require('../data/events');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require('../middleware/auth');
 
+let server;
+
 describe('Event Planning System', () => {
   let authToken;
   
+  beforeAll((done) => {
+    server = app.listen(3001, done); // Start the server on a different port for testing
+  });
+
+  afterAll((done) => {
+    server.close(done); // Close the server after all tests
+  });
+
   beforeEach(() => {
     // Clear data
     users.length = 0;
